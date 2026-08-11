@@ -1,109 +1,85 @@
-# Live Demo
+# Chat App ✨
 
-[Check out the live app here!](https://chat-app-8og2.onrender.com/)
-
-# ✨ Fullstack Chat & Video Calling App ✨
-
-A modern, scalable real-time chat and video calling application with authentication, language exchange, and a beautiful themed UI.
-
+A full-stack real-time chat and video calling app with authentication, friend requests, live notifications, and a themeable UI.
 
 ## Highlights
 
-- 🌐 **Real-time Messaging** with Typing Indicators & Reactions
-- 📹 **1-on-1 and Group Video Calls** with Screen Sharing & Recording
-- 🔐 **JWT Authentication** & Protected Routes
-- 🌍 **Language Exchange Platform** with 32 Unique UI Themes
-- ⚡ **Tech Stack:** React + Express + MongoDB + TailwindCSS + TanStack Query
-- 🧠 **Global State Management** with Zustand
-- 🚨 **Error Handling** (Frontend & Backend)
-- 🚀 **Free Deployment**
-- 🎯 **Built with Scalable Technologies** like Stream
-- ⏳ And much more!
+- 🔐 **JWT Authentication** with protected routes
+- 💬 **Real-time 1-on-1 Messaging** powered by Stream Chat
+- 📹 **1-on-1 Video Calls** powered by Stream Video
+- 👥 **Friend Requests** - send, accept, and browse recommended users
+- 🔔 **Live Notifications** - unread messages and friend requests shown in real time via websocket events, no polling
+- 🎨 **32+ UI Themes** via DaisyUI, including a custom "Aurora" theme
+- 🌍 **Language Exchange Profiles** - native/learning language, bio, location
+- 🧠 **Global State** with Zustand, server state with TanStack Query
 
 ---
 
 ## Tech Stack
-- **Frontend:** React, Zustand, TanStack Query, TailwindCSS, Socket.io-client, Axios
-- **Backend:** Node.js, Express, MongoDB (Mongoose), Socket.io, JWT, bcryptjs
-- **Other:** Stream (for scalable messaging/video), 32 UI themes
-
----
-
-## Features
-- User registration and login (JWT-based authentication)
-- Real-time messaging (Socket.io)
-- Typing indicators and message reactions *(if implemented)*
-- 1-on-1 and group video calls *(if implemented)*
-- Screen sharing and recording *(if implemented)*
-- Online users list
-- Language exchange platform *(if implemented)*
-- 32 unique UI themes *(if implemented)*
-- Global state management with Zustand *(if implemented)*
-- Error handling (frontend & backend)
-- Free deployment ready
+- **Frontend:** React (Vite), Zustand, TanStack Query, TailwindCSS + DaisyUI, Axios, React Router
+- **Backend:** Node.js, Express, MongoDB (Mongoose), JWT, bcryptjs
+- **Realtime:** Stream Chat & Stream Video
 
 ---
 
 ## Folder Structure
 ```
-chat-app/
-  backend/      # Express server, API, WebSocket, MongoDB models
+chat_app/
+  backend/      # Express server, API routes, MongoDB models
   frontend/     # React app (UI, components, routing)
 ```
 
 ---
 
-## .env Setup
+## Environment Variables
 
-### Backend (`/backend`)
+### Backend (`/backend/.env`)
 ```
 PORT=5001
-MONGO_URI=your_mongo_uri
-STEAM_API_KEY=your_steam_api_key
-STEAM_API_SECRET=your_steam_api_secret
+MONGO_URI=your_mongodb_connection_string
+STEAM_API_KEY=your_stream_api_key
+STEAM_API_SECRET=your_stream_api_secret
 JWT_SECRET_KEY=your_jwt_secret
 NODE_ENV=development
 ```
 
-### Frontend (`/frontend`)
+### Frontend (`/frontend/.env`)
 ```
 VITE_STREAM_API_KEY=your_stream_api_key
 ```
 
+Get MongoDB credentials from [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and Stream credentials from [GetStream.io](https://getstream.io/).
+
 ---
 
-## Running the App
+## Running Locally
 
-### 🔧 Run the Backend
+### Backend
 ```bash
 cd backend
 npm install
 npm run dev
 ```
 
-### 💻 Run the Frontend
+### Frontend
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
+Both need to run at the same time - backend on port 5001, frontend on port 5173.
+
 ---
 
 ## Usage
-1. Register a new user via the Sign Up page.
-2. Log in with your credentials.
-3. Start chatting and video calling with other online users in real time!
+1. Sign up for a new account.
+2. Complete onboarding (name, bio, languages, location).
+3. Send/accept friend requests from the Notifications page.
+4. Chat and start video calls with friends in real time.
 
 ---
 
 ## Scripts
-- **Backend:**
-  - `npm run dev` — Start Express server in development mode
-- **Frontend:**
-  - `npm run dev` — Start React dev server
-  - `npm run build` — Build for production
-
----
-
-> **Note:** Some features (video calling, group calls, screen sharing, recording, language exchange, UI themes, Zustand, TanStack Query, Stream integration) are listed as highlights. Please check the codebase to confirm which are fully implemented and which are planned/aspirational.
+- **Backend:** `npm run dev` - starts the Express server with nodemon
+- **Frontend:** `npm run dev` - starts the Vite dev server, `npm run build` - production build

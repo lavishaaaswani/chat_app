@@ -1,7 +1,9 @@
+import { Link } from "react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { acceptFriendRequest, getFriendRequests } from "../lib/api";
 import { BellIcon, ClockIcon, MessageSquareIcon, UserCheckIcon } from "lucide-react";
 import NoNotificationsFound from "../components/NoNotificationsFound";
+import useUnreadMessages from "../hooks/useUnreadMessages";
 
 const NotificationsPage = () => {
   const queryClient = useQueryClient();
@@ -10,6 +12,8 @@ const NotificationsPage = () => {
     queryKey: ["friendRequests"],
     queryFn: getFriendRequests,
   });
+
+  const { conversations: unreadConversations } = useUnreadMessages();
 
   const { mutate: acceptRequestMutation, isPending } = useMutation({
     mutationFn: acceptFriendRequest,
@@ -122,9 +126,53 @@ const NotificationsPage = () => {
               </section>
             )}
 
-            {incomingRequests.length === 0 && acceptedRequests.length === 0 && (
-              <NoNotificationsFound />
+            {/* NEW MESSAGES */}
+            {unreadConversations.length > 0 && (
+              <section className="space-y-4">
+                <h2 className="text-xl font-semibold flex items-center gap-2">
+                  <MessageSquareIcon className="h-5 w-5 text-primary" />
+                  New Messages
+                  <span className="badge badge-primary ml-2">{unreadConversations.length}</span>
+                </h2>
+
+                <div className="space-y-3">
+                  {unreadConversations.map((conversation) => (
+                    <Link
+                      key={conversation.channelId}
+                      to={`/chat/${conversation.otherUserId}`}
+                      className="card bg-base-200 shadow-sm hover:shadow-md transition-shadow block"
+                    >
+                      <div className="card-body p-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <div className="avatar w-14 h-14 rounded-full bg-base-300">
+                              <img
+                                src={conversation.otherUserImage}
+                                alt={conversation.otherUserName}
+                              />
+                            </div>
+                            <div>
+                              <h3 className="font-semibold">{conversation.otherUserName}</h3>
+                              <p className="text-sm opacity-70 truncate max-w-xs">
+                                {conversation.lastMessageText}
+                              </p>
+                            </div>
+                          </div>
+
+                          <span className="badge badge-primary">
+                            {conversation.unreadCount} new
+                          </span>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </section>
             )}
+
+            {incomingRequests.length === 0 &&
+              acceptedRequests.length === 0 &&
+              unreadConversations.length === 0 && <NoNotificationsFound />}
           </>
         )}
       </div>

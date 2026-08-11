@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router";
 import useAuthUser from "../hooks/useAuthUser";
+import useNotificationCount from "../hooks/useNotificationCount";
 import { BellIcon, LogOutIcon, ShipWheelIcon } from "lucide-react";
 import ThemeSelector from "./ThemeSelector";
 import useLogout from "../hooks/useLogout";
@@ -8,6 +9,7 @@ const Navbar = () => {
   const { authUser } = useAuthUser();
   const location = useLocation();
   const isChatPage = location.pathname?.startsWith("/chat");
+  const { total: notificationCount } = useNotificationCount();
 
   // const queryClient = useQueryClient();
   // const { mutate: logoutMutation } = useMutation({
@@ -35,8 +37,13 @@ const Navbar = () => {
 
           <div className="flex items-center gap-3 sm:gap-4 ml-auto">
             <Link to={"/notifications"}>
-              <button className="btn btn-ghost btn-circle">
+              <button className="btn btn-ghost btn-circle indicator">
                 <BellIcon className="h-6 w-6 text-base-content opacity-70" />
+                {notificationCount > 0 && (
+                  <span className="indicator-item badge badge-primary badge-xs">
+                    {notificationCount > 99 ? "99+" : notificationCount}
+                  </span>
+                )}
               </button>
             </Link>
           </div>

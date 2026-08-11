@@ -9,6 +9,21 @@ export default {
   plugins: [daisyui],
   daisyui: {
     themes: [
+      {
+        aurora: {
+          primary: "#6366f1",
+          secondary: "#a855f7",
+          accent: "#ec4899",
+          neutral: "#1e1b2e",
+          "base-100": "#13111c",
+          "base-200": "#1c1930",
+          "base-300": "#282344",
+          info: "#38bdf8",
+          success: "#34d399",
+          warning: "#fbbf24",
+          error: "#f87171",
+        },
+      },
       "light",
       "dark",
       "cupcake",
