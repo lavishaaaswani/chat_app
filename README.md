@@ -1,4 +1,7 @@
-# Chat App 
+# Chat App
+
+**Live demo:** https://chat-app-diyk.onrender.com
+*(Free tier - first load may take ~50s to wake up if it's been inactive.)*
 
 A full-stack real-time chat and video calling app with authentication, friend requests, live notifications, and a themeable UI.
 
