@@ -1,4 +1,4 @@
-# Chat App ✨
+# Chat App 
 
 A full-stack real-time chat and video calling app with authentication, friend requests, live notifications, and a themeable UI.
 
